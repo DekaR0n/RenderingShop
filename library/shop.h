@@ -37,6 +37,7 @@ typedef struct CashRegister {
 } CashRegister;
 
 
+Queue *temp(QueueCommon* queue_common);
 // Creates first element in queue.
 QueueCommon *create_first(Visitor *visitor);
 
@@ -47,21 +48,25 @@ int is_empty();
 int is_full();
 
 // Delete the first element.
-QueueCommon *dequeue(Visitor *visitor);
+QueueCommon *dequeue();
 
 // Add an element to the last side.
 QueueCommon *enqueue(Visitor *visitor);
 
 // Returns the first element in queue.
-void front(QueueCommon *queue);
+Queue *front();
 
 // Returns the last element in queue.
-void last(QueueCommon *queue);
+Queue *last();
 
 int random(int max);
+
 void render();
+
 void start();
+
 int *file_handler();
+
 void const_init();
 
 #endif //RENDERINGSHOP_SHOP_H

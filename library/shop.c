@@ -13,6 +13,7 @@ int CASHIERS;
 int NEXT_CUSTOMER;
 int CUSTOMER_CHECK;
 int CASHIER_NUMBER;
+
 QueueCommon *root = NULL;
 
 
@@ -51,7 +52,7 @@ void start() {
     // system("cls");
     render();
     Sleep(600);
-    // system("cls");
+    system("cls");
 }
 
 int *file_handler() {
@@ -88,9 +89,18 @@ void const_init() {
     free(file_values);
 }
 
-
+Queue *temp(QueueCommon* queue_common){
+    Queue * temp=root->first;
+    while (temp->next!=queue_common->last){
+        temp=temp->next;
+    }
+    return temp;
+}
 QueueCommon *create_first(Visitor *visitor) {
-
+    root->first->visitor = visitor;
+    root->last = NULL;
+    root->length=1;
+    return root;
 }
 
 int is_empty() {
@@ -98,25 +108,35 @@ int is_empty() {
 }
 
 int is_full() {
-    return root->length;//CASHIER_QUEUE;
+    return root->length == CASHIER_QUEUE;
 }
 
-QueueCommon *dequeue(Visitor *visitor) {
-
+QueueCommon *dequeue() {
+    QueueCommon *queue_temp = root;
+    queue_temp->first = root->first->next;
+    root->length--;
+    front()->next = NULL;
+    free(queue_temp);
+    return NULL;
 }
 
 QueueCommon *enqueue(Visitor *visitor) {
-
+    if(!is_full()) {
+        if (!is_empty()) {
+            last()->visitor = visitor;
+            last()->next = NULL;
+            root->length++;
+        } else {
+            create_first(visitor);
+        }
+    }
+    return root;
 }
 
-void front(QueueCommon *queue) {
-
+Queue *front() {
+    return root->first;
 }
 
-void last(QueueCommon *queue) {
-
+Queue *last() {
+    return root->last;
 }
-
-void pop(QueueCommon *queue) {
-
-};
