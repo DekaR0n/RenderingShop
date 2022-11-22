@@ -5,6 +5,8 @@
 #ifndef RENDERINGSHOP_SHOP_H
 #define RENDERINGSHOP_SHOP_H
 
+#include "stdio.h"
+
 typedef struct Visitor {
     char *name;
     int time;
@@ -17,43 +19,49 @@ typedef struct Queue {
     struct Queue *next;
 } Queue;
 
+
 // Структура очереди.
 typedef struct QueueCommon {
     struct Queue *last;
     struct Queue *first;
     int length;
+    //struct QueueCommon *next;
 } QueueCommon;
 
 // Структура касса.
 typedef struct CashRegister {
-    int val;
+    int work_value;
     int visitor_value;
     int cash;
     QueueCommon *current_queue;
-    struct CashRegister *next;
 } CashRegister;
 
-// ..
 
-Queue *get_last(QueueCommon *queue);
+// Creates first element in queue.
+QueueCommon *create_first(Visitor *visitor);
 
-//
-void push(Queue *queue);
+// Check if the queue is empty.
+int is_empty();
 
-//
-void pop(Queue *queue);
+// Check if the queue is full.
+int is_full();
 
-// Возвращает элемент очереди
-Visitor *getElement();
+// Delete the first element.
+QueueCommon *dequeue(Visitor *visitor);
 
-// Печать работы магазина
-void show();
+// Add an element to the last side.
+QueueCommon *enqueue(Visitor *visitor);
 
-// Возвращает имя человека в очереди
-char *get_name();
+// Returns the first element in queue.
+void front(QueueCommon *queue);
 
-// Возвращает сумму покупки.
-void get_value();
+// Returns the last element in queue.
+void last(QueueCommon *queue);
 
+int random(int max);
+void render();
+void start();
+int *file_handler();
+void const_init();
 
 #endif //RENDERINGSHOP_SHOP_H
