@@ -78,7 +78,6 @@ int *file_handler() {
 
 void const_init() {
     int *file_values = file_handler();
-
     CUSTOMER_TIME = file_values[0];
     CASHIER_QUEUE = file_values[1];
     CASHIERS = file_values[2];
